@@ -38,11 +38,11 @@ router.post('/:_id/exercises', (req, res, next) => {
         userId,
       }).then((ex) =>
         res.status(200).send({
-          username: user.username,
-          description,
-          duration,
           _id: user._id,
-          date: moment(ex.date).format('ddd MMMM DD YYYY'),
+          username: user.username,
+          date: moment(ex.date).format('ddd MMM DD YYYY'),
+          duration,
+          description
         })
       );
     })
@@ -84,7 +84,7 @@ router.get('/:_id/logs', (req, res, next) => {
             log: log.map((o) => ({
               description: o.description,
               duration: o.duration,
-              date: moment(o).format('ddd MMMM DD YYYY'),
+              date: moment(o).format('ddd MMM DD YYYY'),
             })),
           })
         );
