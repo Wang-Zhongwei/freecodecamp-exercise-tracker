@@ -8,8 +8,12 @@ const logger = require('morgan');
 const cors = require('cors')
 
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track' )
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
+// load schemas
 require('./models');
 
 app.use(cors())
@@ -24,6 +28,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
+// load and mount routes for app
 const api = require('./routes');
 app.use('/api', api);
 
